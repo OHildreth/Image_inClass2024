@@ -11,17 +11,19 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Query(filter: #Predicate<Node>{ $0.nodeType == 0 }, sort: [SortDescriptor(\Node.name)]) private var nodes: [Node]
+    @Query(filter: #Predicate<Node>{ $0.nodeType == 0 }, sort: [SortDescriptor(\Node.name)])
+    private var nodes: [Node]
     
     private var rootNodes: [Node] {nodes.filter({$0.nodeType == 0})}
 
+    
     var body: some View {
         VStack {
             HSplitView {
-                Text("Source List")
+                SourceList(nodes: nodes)
                     .padding()
                 VStack {
-                    Text("Item Table")
+                    ItemsTable(items: nodes.first?.items ?? [])
                         .padding()
                     Text("Detail View")
                         .padding()

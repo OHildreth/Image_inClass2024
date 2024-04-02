@@ -55,6 +55,7 @@ final class Node: Identifiable {
         }
     }
     
+    
     func flattenedImageItems() -> [ImageItem] {
         var localItems: [ImageItem] = self.items
         
