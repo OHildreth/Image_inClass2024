@@ -69,6 +69,4 @@ final class Node: Identifiable {
         
         return localItems
     }
-
-    
 }

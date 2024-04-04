@@ -12,7 +12,7 @@ import SwiftData
 struct Image_inClass2024App: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Node.self, ImageItem.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

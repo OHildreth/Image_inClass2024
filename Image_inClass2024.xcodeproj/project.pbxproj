@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C053AC7C2BBE062B00DD63CD /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C053AC7B2BBE062B00DD63CD /* PreferencesController.swift */; };
 		C09C4D982BBB5E4300E6A81B /* SourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C4D972BBB5E4300E6A81B /* SourceList.swift */; };
 		C09C4D9A2BBB5F3A00E6A81B /* ItemsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C4D992BBB5F3A00E6A81B /* ItemsTable.swift */; };
 		C09C4D9D2BBB5FEC00E6A81B /* URL_directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09C4D9C2BBB5FEC00E6A81B /* URL_directory.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C053AC7B2BBE062B00DD63CD /* PreferencesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
 		C09C4D972BBB5E4300E6A81B /* SourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceList.swift; sourceTree = "<group>"; };
 		C09C4D992BBB5F3A00E6A81B /* ItemsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTable.swift; sourceTree = "<group>"; };
 		C09C4D9C2BBB5FEC00E6A81B /* URL_directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_directory.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C053AC7A2BBE061A00DD63CD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C053AC7B2BBE062B00DD63CD /* PreferencesController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		C09C4D962BBB5E1500E6A81B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 			children = (
 				C0CA2EB82BB4C5AE007FE423 /* Image_inClass2024App.swift */,
 				C0CA2EBA2BB4C5AE007FE423 /* ContentView.swift */,
+				C053AC7A2BBE061A00DD63CD /* Controllers */,
 				C09C4D9B2BBB5FD200E6A81B /* Extensions */,
 				C0CA2EC92BB4CAA9007FE423 /* Data Model */,
 				C09C4D962BBB5E1500E6A81B /* Views */,
@@ -190,6 +201,7 @@
 				C0CA2EBB2BB4C5AE007FE423 /* ContentView.swift in Sources */,
 				C09C4D9F2BBB616D00E6A81B /* UserDefaults_magicStrings.swift in Sources */,
 				C0CA2EBD2BB4C5AE007FE423 /* Item.swift in Sources */,
+				C053AC7C2BBE062B00DD63CD /* PreferencesController.swift in Sources */,
 				C09C4D982BBB5E4300E6A81B /* SourceList.swift in Sources */,
 				C0CA2EB92BB4C5AE007FE423 /* Image_inClass2024App.swift in Sources */,
 				C09C4DA22BBB61B500E6A81B /* DataModel.swift in Sources */,
