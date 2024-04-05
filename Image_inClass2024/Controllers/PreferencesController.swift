@@ -11,6 +11,10 @@ import Observation
 @Observable
 class PreferencesController {
     var allowedImageFileExtension: [AllowedFileExtension]
+    
+    init(allowedImageFileExtension: [AllowedFileExtension]) {
+        self.allowedImageFileExtension = allowedImageFileExtension
+    }
 }
 
 

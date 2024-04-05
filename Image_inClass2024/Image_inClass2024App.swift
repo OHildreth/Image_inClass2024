@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+
 @main
 struct Image_inClass2024App: App {
     var sharedModelContainer: ModelContainer = {
