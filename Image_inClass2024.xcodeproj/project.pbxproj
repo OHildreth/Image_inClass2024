@@ -20,6 +20,7 @@
 		C0CA2EC22BB4C5B0007FE423 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0CA2EC12BB4C5B0007FE423 /* Preview Assets.xcassets */; };
 		C0CA2ECB2BB4CAC6007FE423 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA2ECA2BB4CAC6007FE423 /* Node.swift */; };
 		C0CA2ECD2BB4CB59007FE423 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CA2ECC2BB4CB59007FE423 /* ImageItem.swift */; };
+		C0FE21842BC0A0D600094DFB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE21832BC0A0D600094DFB /* PreferencesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C0CA2EC32BB4C5B0007FE423 /* Image_inClass2024.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Image_inClass2024.entitlements; sourceTree = "<group>"; };
 		C0CA2ECA2BB4CAC6007FE423 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C0CA2ECC2BB4CB59007FE423 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
+		C0FE21832BC0A0D600094DFB /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				C09C4D972BBB5E4300E6A81B /* SourceList.swift */,
 				C09C4D992BBB5F3A00E6A81B /* ItemsTable.swift */,
+				C0FE21832BC0A0D600094DFB /* PreferencesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0CA2EBB2BB4C5AE007FE423 /* ContentView.swift in Sources */,
+				C0FE21842BC0A0D600094DFB /* PreferencesView.swift in Sources */,
 				C09C4D9F2BBB616D00E6A81B /* UserDefaults_magicStrings.swift in Sources */,
 				C0CA2EBD2BB4C5AE007FE423 /* Item.swift in Sources */,
 				C053AC7C2BBE062B00DD63CD /* PreferencesController.swift in Sources */,

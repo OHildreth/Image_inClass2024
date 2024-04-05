@@ -29,5 +29,9 @@ struct Image_inClass2024App: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        
+        Settings {
+            PreferencesView()
+        }
     }
 }
