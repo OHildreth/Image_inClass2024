@@ -9,28 +9,21 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     
-    
-    @Query(filter: #Predicate<Node>{ $0.nodeType == 0 }, sort: [SortDescriptor(\Node.name)])
-    private var nodes: [Node]
-    
-    private var rootNodes: [Node] {nodes.filter({$0.nodeType == 0})}
-
+    @Environment(AppController.self) private var appController: AppController
     
     var body: some View {
+        @Bindable var dataModel = appController.dataModel
+        
+        
         VStack {
-            HStack {
-                importButton
-                Text("Nodes: \(nodes.count)")
-                Text("Root Nodes: \(rootNodes.count)")
-            }
+            importButton
             HSplitView {
-                SourceList(nodes: nodes)
+                SourceList(nodes: $dataModel.rootNodes, selectionManager: appController.selectionManager)
                     .padding()
                     .frame(maxHeight: .infinity)
                 VStack {
-                    ItemsTable(items: nodes.first?.items ?? [])
+                    ItemsTable(items: appController.dataModel.rootNodes.first?.items ?? [])
                         .padding()
                     Text("Detail View")
                         .padding()
@@ -45,8 +38,8 @@ struct ContentView: View {
         .padding()
         .onAppear() {
         #if DEBUG
-            try? modelContext.delete(model: Node.self)
-            try? modelContext.delete(model: ImageItem.self)
+            try? appController.dataModel.modelContext.delete(model: Node.self)
+            try? appController.dataModel.modelContext.delete(model: ImageItem.self)
         #endif
         }
     }
@@ -60,12 +53,12 @@ struct ContentView: View {
             panel.canChooseDirectories = true
             panel.allowsMultipleSelection = false
             
-            let dataModel = DataModel(modelContext: modelContext)
             if panel.runModal() == .OK {
                 if let url = panel.url {
-                    dataModel.importDirectory(url, intoNode: nil)
+                    appController.dataModel.importDirectory(url, intoNode: nil)
                 }
             }
+
         }
     }
 }

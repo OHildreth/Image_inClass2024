@@ -11,77 +11,68 @@ import SwiftData
 
 @Observable
 class DataModel {
-    var modelContext: ModelContext?
     
-    init(modelContext: ModelContext? = nil) {
-        self.modelContext = modelContext
-    }
+    private var container: ModelContainer
     
-    func importDirectory(_ url: URL, intoNode parentNode: Node?) {
-        guard let localModelContext = modelContext else { return }
-        
-        let type = URL.URLType(withURL: url)
-        
-        if type != .directory {return}
-        
-        
-        let newNode = Node(withURL: url, parentNode)
-        
-        localModelContext.insert(newNode)
-        
-        if let parentNode {
-            if parentNode.subNodes != nil {
-                parentNode.subNodes?.append(newNode)
-            } else {
-                parentNode.subNodes = []
-                parentNode.subNodes?.append(newNode)
-            }
-        }
-        
-        var subdirectories: [URL] = []
-        var files: [URL] = []
-        
-        if let contentURLs = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey]) {
-            for nextURL in contentURLs {
-                let nextType = URL.URLType(withURL: nextURL)
-                
-                switch nextType {
-                case .directory:
-                    subdirectories.append(nextURL)
-                case .file:
-                    files.append(nextURL)
-                case .fileDoesNotExist:
-                    continue
-                }
-            }
-        }
+    var modelContext: ModelContext
+    
+    var rootNodes: [Node] = []
+    
+    var sortNodesKeyPaths: [KeyPathComparator<Node>] = [.init(\.name)]
+    
+    
+    @Transient
+    var selectedNodes: [Node] = []
+    
+    
+    @Transient
+    var visibleItems: [ImageItem] {
+        get {
+            var items: [ImageItem] = []
             
-         
-        for nextFile in files {
-            self.importFile(nextFile, intoNode: newNode)
+            for nextNode in selectedNodes {
+                items.append(contentsOf: nextNode.flattenedImageItems())
+            }
+            
+            return items
         }
+    }
+    
+    
+    init() {
+        let sharedModelContainer: ModelContainer = {
+            let schema = Schema([
+                Node.self, ImageItem.self
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        for nextDirectory in subdirectories {
-            self.importDirectory(nextDirectory, intoNode: newNode)
-        }
+            do {
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
+        }()
         
+        container = sharedModelContainer
+        
+        modelContext = ModelContext(sharedModelContainer)
     }
     
     
-    func importFile(_ url: URL, intoNode parentNode: Node) {
-        guard let localModelContext = modelContext else { return }
-        
-        let type = URL.URLType(withURL: url)
-        
-        if type != .file {
-            return
+    // MARK: - Fetching Data
+    func fetchData() {
+        do {
+            let sortOrder = [SortDescriptor<Node>(\.name)]
+            let predicate = #Predicate<Node>{ $0.nodeType == 0 }
+            
+            let descriptor = FetchDescriptor(predicate: predicate, sortBy: sortOrder)
+            
+            rootNodes = try modelContext.fetch(descriptor)
+        } catch {
+            print("ERROR: Fetch Failed")
         }
-        
-        let newItem = ImageItem(url: url)
-        
-        localModelContext.insert(newItem)
-        
-        newItem.node = parentNode
     }
+    
+    
     
 }

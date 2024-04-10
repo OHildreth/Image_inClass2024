@@ -13,38 +13,48 @@ struct PreferencesView: View {
     
     @State var selection: Set<AllowedFileExtension.ID> = []
     
-
+    
     var body: some View {
-        VStack {
-            Button("+") {
-                preferencesController.addExtension()
+        List($preferencesController.allowedImageFileExtensions,
+             id: \.id,
+             editActions: [.delete,. move],
+             selection: $selection)
+        { $nextExtension in
+            TextField("File Extension", text: $nextExtension.fileExtension)
+                .contextMenu {
+                    Button("Delete", action: deleteSelection)
+                }
+        }.toolbar() {
+            ToolbarItem() {
+                Button(action: addNewFileExtension, label: {
+                    Image(systemName: "plus")
+                })
             }
-            .padding()
-            
-            List($preferencesController.allowedImageFileExtensions,
-                 id: \.id,
-                 editActions: [.delete,. move],
-                 selection: $selection)
-            { $nextExtension in
-                TextField("File Extension", text: $nextExtension.fileExtension)
-                    .contextMenu {
-                        Button("Delete") {
-                            let selectionArray = Array(selection)
-                            
-                            let extensionsToDelete = preferencesController.allowedImageFileExtensions.filter({selectionArray.contains($0.id)})
-                            
-                            preferencesController.removeExtensions(extensionsToDelete)
-                        }
-                    }
+            ToolbarItem {
+                Button(action: deleteSelection, label: {
+                    Image(systemName: "minus")
+                })
             }
         }
+    }
+    
+    private func addNewFileExtension() {
+        preferencesController.addExtension()
+    }
+    
+    private func deleteSelection() {
+        let selectionArray = Array(selection)
+        
+        let extensionsToDelete = preferencesController.allowedImageFileExtensions.filter({selectionArray.contains($0.id)})
+        
+        preferencesController.removeExtensions(extensionsToDelete)
     }
 }
 
 
 /*
  #Preview {
-     PreferencesView()
+ PreferencesView()
  }
  */
 

@@ -9,16 +9,18 @@ import SwiftUI
 import SwiftData
 
 struct SourceList: View {
-    var nodes: [Node] = []
+    @Binding var nodes: [Node]
+    
+    @Bindable var selectionManager: SelectionManager
     
     var body: some View {
-        List() {
-            OutlineGroup(nodes, children: \.subNodes) { nextNode in
+        List(selection: $selectionManager.selectedNodes) {
+            OutlineGroup($nodes, id:\.self, children: \.subNodes) { $nextNode in
                 HStack {
                     Image(systemName: "folder.fill")
+                    TextField("Name", text: $nextNode.name)
                     Text(nextNode.name)
-                    Text(nextNode.parent?.name ?? "No Parent")
-                    Text("\(nextNode.subNodes?.count ?? 0)")
+                    
                 }
             }
         }
@@ -26,6 +28,10 @@ struct SourceList: View {
     }
 }
 
-#Preview {
-    SourceList()
-}
+
+/*
+ #Preview {
+     SourceList()
+ }
+ */
+
