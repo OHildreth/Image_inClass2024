@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct InspectorView: View {
+    
+    var dataModel: DataModel
+    
+    
     var body: some View {
         TabView {
-            Text("Node Inspector")
+            NodeInspector(nodes: dataModel.selectedNodes)
                 .tabItem( {Text("􀈕")} )
-            Text("Image Inspector")
+            ImageItemInspector(imageItems: dataModel.selectedImageItems)
                 .tabItem( {Text("􀏅")} )
         }
             }
 }
 
-#Preview {
-    InspectorView()
-}
+/*
+ #Preview {
+     InspectorView()
+ }
+ */
+

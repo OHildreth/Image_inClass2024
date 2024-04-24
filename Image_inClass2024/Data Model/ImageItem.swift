@@ -25,4 +25,31 @@ final class ImageItem: Identifiable {
         
         self.name = url.deletingPathExtension().lastPathComponent
     }
+    
+    @Transient
+    private var resourceValues: URLResourceValues?
+    
+    func urlResources() -> URLResourceValues? {
+        if resourceValues == nil {
+            resourceValues = try? url.resourceValues(forKeys: [.totalFileSizeKey,.creationDateKey, .contentModificationDateKey])
+        }
+       
+        return resourceValues
+        
+    }
+    
+    @Transient
+    var fileSize: Int? {
+        urlResources()?.totalFileSize
+    }
+    
+    @Transient
+    var creationDate: Date? {
+        urlResources()?.creationDate
+    }
+    
+    @Transient
+    var contenModificationDate: Date? {
+        urlResources()?.contentModificationDate
+    }
 }

@@ -9,7 +9,32 @@ import Foundation
 
 
 extension DataModel {
-    func importDirectory(_ url: URL, intoNode parentNode: Node?) {
+    
+    func importURLs(_ urls: [URL], intoNode parentNode: Node?) throws {
+        if urls.isEmpty { throw ImportError.noURLsToImport}
+        
+        let files = urls.filter( { !$0.isDirectory} )
+        
+        if files.count != 0 && parentNode == nil {
+            throw ImportError.cannotImportFileWithoutANode
+        }
+        
+        if let parentNode {
+            for nextFile in files {
+                importFile(nextFile, intoNode: parentNode)
+            }
+        }
+        
+        let directories = urls.filter( { $0.isDirectory } )
+        
+        for nextDirectory in directories {
+            importDirectory(nextDirectory, intoNode: parentNode)
+        }
+        
+        fetchData()
+    }
+    
+    private func importDirectory(_ url: URL, intoNode parentNode: Node?) {
         
         let type = URL.URLType(withURL: url)
         
@@ -45,8 +70,6 @@ extension DataModel {
                     continue
                 }
             }
-            
-            fetchData()
         }
             
          
@@ -85,4 +108,6 @@ extension DataModel {
         
         newItem.node = parentNode
     }
+    
+    
 }

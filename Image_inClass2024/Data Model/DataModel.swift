@@ -85,6 +85,8 @@ class DataModel {
         container = sharedModelContainer
         
         modelContext = ModelContext(sharedModelContainer)
+        
+        fetchData()
     }
     
     
