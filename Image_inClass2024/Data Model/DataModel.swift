@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+import OrderedCollections
+
 @Observable
 class DataModel {
     
@@ -28,14 +30,41 @@ class DataModel {
     @Transient
     var visibleItems: [ImageItem] {
         get {
-            var items: [ImageItem] = []
-            
-            for nextNode in selectedNodes {
-                items.append(contentsOf: nextNode.flattenedImageItems())
-            }
-            
-            return items
+            getAllImageItemsFromSelectedNodes()
         }
+    }
+    
+    
+    private func getAllImageItemsFromSelectedNodes() -> [ImageItem] {
+        var items: OrderedSet<ImageItem> = []
+        
+        for nextNode in selectedNodes {
+            items.append(contentsOf: nextNode.flattenedImageItems())
+        }
+        
+        return Array(items)
+
+    }
+    
+    @Transient
+    var selectedImageItems: [ImageItem] = []
+    
+    @Transient
+    var selectedImageItemsIds: [ImageItem.ID] = [] {
+        didSet {
+            updateImageItems()
+        }
+        
+    }
+    
+    private func updateImageItems() {
+        let ids = selectedImageItemsIds
+        
+        let items = self.visibleItems
+        
+        let filteredItems = items.filter( { ids.contains([$0.id]) } )
+        
+        selectedImageItems = filteredItems
     }
     
     

@@ -11,13 +11,18 @@ import SwiftData
 struct ItemsTable: View {
     var items: [ImageItem]
     
+    @Bindable var selectionManager: SelectionManager
+    
     var body: some View {
-        Table(items) {
+        Table(items, selection: $selectionManager.selectedImageItemIDs) {
             TableColumn("Name", value: \.name)
         }
     }
 }
 
-#Preview {
-    ItemsTable(items: [])
-}
+/*
+ #Preview {
+     ItemsTable(items: [], )
+ }
+ */
+

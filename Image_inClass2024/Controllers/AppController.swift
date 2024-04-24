@@ -23,6 +23,10 @@ class AppController {
 }
 
 extension AppController: SelectionManagerDelegate {
+    func selectedImageItemIDsDidChange(_ imageItemIDs: Set<ImageItem.ID>) {
+        dataModel.selectedImageItemsIds = Array(imageItemIDs)
+    }
+    
     func selectedNodesDidChange(_ node: Set<Node>) {
         let sort = SortDescriptor<Node>(\.name)
         dataModel.selectedNodes = Array(node).sorted(using: sort)

@@ -19,8 +19,6 @@ struct SourceList: View {
                 HStack {
                     Image(systemName: "folder.fill")
                     TextField("Name", text: $nextNode.name)
-                    Text(nextNode.name)
-                    
                 }
             }
         }

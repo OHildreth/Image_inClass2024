@@ -18,8 +18,16 @@ class SelectionManager {
             delegate?.selectedNodesDidChange(selectedNodes)
         }
     }
+    
+    var selectedImageItemIDs: Set<ImageItem.ID> = [] {
+        didSet {
+            delegate?.selectedImageItemIDsDidChange(selectedImageItemIDs)
+        }
+    }
 }
 
 protocol SelectionManagerDelegate {
     func selectedNodesDidChange(_ node: Set<Node>)
+    
+    func selectedImageItemIDsDidChange(_ imageItems: Set<ImageItem.ID>)
 }

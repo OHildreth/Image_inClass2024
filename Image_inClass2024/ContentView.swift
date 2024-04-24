@@ -19,17 +19,18 @@ struct ContentView: View {
         VStack {
             importButton
             HSplitView {
-                SourceList(nodes: $dataModel.rootNodes, selectionManager: appController.selectionManager)
+                SourceList(nodes: $dataModel.rootNodes, 
+                           selectionManager: appController.selectionManager)
                     .padding()
                     .frame(maxHeight: .infinity)
                 VStack {
-                    ItemsTable(items: appController.dataModel.rootNodes.first?.items ?? [])
+                    ItemsTable(items: dataModel.visibleItems, selectionManager: appController.selectionManager)
                         .padding()
                     Text("Detail View")
                         .padding()
                 }
                 .frame(maxHeight: .infinity)
-                Text("Inspector")
+                InspectorView()
                     .padding()
                     .frame(maxHeight: .infinity)
             }
