@@ -25,13 +25,7 @@ struct ContentView: View {
             .padding()
             .frame(maxHeight: .infinity)
         } detail: {
-            VStack {
-                ItemsTable(items: dataModel.visibleItems, selectionManager: appController.selectionManager)
-                    //.padding()
-                Text("Detail View")
-                    .padding()
-            }
-            .frame(maxHeight: .infinity)
+            ImageContent()
         }.inspector(isPresented: $visibility_inspector) {
             InspectorView(dataModel: dataModel)
                 .padding()
@@ -55,26 +49,6 @@ struct ContentView: View {
         #endif
         }
     }
-    
-    /*
-     @ViewBuilder
-     var importButton: some View {
-     Button("Select URL") {
-     let panel = NSOpenPanel()
-     panel.canChooseFiles = false
-     panel.canChooseDirectories = true
-     panel.allowsMultipleSelection = false
-     
-     if panel.runModal() == .OK {
-     if let url = panel.url {
-     appController.dataModel.importDirectory(url, intoNode: nil)
-     }
-     }
-     
-     }
-     }
-     */
-    
 }
 
 #Preview {

@@ -44,6 +44,11 @@ final class ImageItem: Identifiable {
     }
     
     @Transient
+    var nodeName: String {
+        node?.name ?? "No Parent"
+    }
+    
+    @Transient
     var creationDate: Date? {
         urlResources()?.creationDate
     }

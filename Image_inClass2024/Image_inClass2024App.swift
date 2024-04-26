@@ -13,8 +13,6 @@ import SwiftData
 struct Image_inClass2024App: App {
     @State var appController = AppController()
     
-    
-    
 
     var body: some Scene {
         WindowGroup {

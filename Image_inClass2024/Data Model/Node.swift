@@ -70,3 +70,7 @@ final class Node: Identifiable {
         return localItems
     }
 }
+
+extension Node: Hashable {
+    
+}

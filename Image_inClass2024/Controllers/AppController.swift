@@ -13,9 +13,16 @@ class AppController {
     
     var selectionManager: SelectionManager
     
+    var imageContentVM: ImageContentViewModel
+    
     init() {
-        dataModel = DataModel()
-        selectionManager = SelectionManager()
+        let localDataModel = DataModel()
+        let localSelectionManager = SelectionManager()
+        
+        dataModel = localDataModel
+        selectionManager = localSelectionManager
+        
+        imageContentVM = ImageContentViewModel(dataModel: localDataModel, selectionManager: localSelectionManager)
         
         selectionManager.delegate = self
     }
