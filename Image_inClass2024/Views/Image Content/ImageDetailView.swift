@@ -23,7 +23,7 @@ struct ImageDetailView: View {
                 }
             }
         }
-        .frame(minHeight: 200, maxHeight: .infinity)
+        .frame(minHeight: 300, maxHeight: .infinity)
     }
 }
 

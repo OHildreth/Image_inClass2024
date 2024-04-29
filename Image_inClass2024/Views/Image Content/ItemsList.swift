@@ -20,7 +20,17 @@ struct ItemsList: View {
                 } placeholder: {
                     ProgressView()
                 }
+                .frame(width: 50, height: 75)
+                .clipped()
+                Text(imageItem.name)
+                    .padding(.horizontal)
+                Text(imageItem.nodeName)
+                    .padding(.horizontal)
+                Button(action: {imageItem.url.showInFinder()}, label: {Image(systemName: "link")})
+                
             }
+            
+            
             
         }
     }

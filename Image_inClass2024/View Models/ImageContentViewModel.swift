@@ -58,3 +58,23 @@ class ImageContentViewModel {
         }
     }
 }
+
+
+//MARK: - Handling Selection
+extension ImageContentViewModel {
+    func imageItemTapped(_ item: ImageItem) {
+        selection = Set(arrayLiteral: item.id)
+    }
+    
+    func imageTappedWithModifiers(_ item: ImageItem) {
+        if itemIsSelected(item) {
+            selection.remove(item.id)
+        } else {
+            selection.insert(item.id)
+        }
+    }
+    
+    func itemIsSelected(_ item: ImageItem) -> Bool  {
+        selectionManager.selectedImageItemIDs.contains(item.id) ? true : false
+    }
+}
